@@ -131,3 +131,5 @@ dmypy.json
 
 # Misc
 data/
+models/
+bestmodels/
