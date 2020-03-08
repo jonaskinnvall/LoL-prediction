@@ -10,6 +10,10 @@ from test import testNN
 
 df = pd.read_csv('data/games.csv')
 
+# Drop duplicates
+df = df.drop_duplicates()
+
+# Remove games that lasted shorter than 10 minutes
 df = df[~((df['gameDuration'] / 60) <= 10)]
 
 y = df['winner']
@@ -19,9 +23,12 @@ X = df[['firstTower', 'firstInhibitor', 'firstDragon',
         't2_towerKills', 't2_inhibitorKills', 't2_dragonKills',
         't2_baronKills']]
 
+# Change pandas data frames to numpy ndarrays
 X = X.values
 y = y.values
 
+# Scale the data and change valeus indicating
+# winners from 1 and 2 to 0 and 1 respectively
 X = MinMaxScaler().fit_transform(X)
 y = np.where(y == 1, 0, y)
 y = np.where(y == 2, 1, y)

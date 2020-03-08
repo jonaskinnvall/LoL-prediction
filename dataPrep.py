@@ -2,9 +2,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-""" pd.set_option('display.max_rows', 500)
-pd.set_option('display.max_columns', 500)
-pd.set_option('display.width', 1000) """
+# pd.set_option('display.max_rows', 1000)
+# pd.set_option('display.max_columns', 500)
+# pd.set_option('display.width', 1000)
 sns.set()
 
 # Read csv file into pandas data frame
@@ -27,6 +27,8 @@ df = df.drop(['gameId', 'creationTime', 'seasonId'], axis=1)
 
 # See if there are any duplicated rows
 print('Duplicates: \n', df.duplicated().sum(), '\n')
+
+df = df.drop_duplicates()
 
 # Display how balanced the dataset is w.r.t winner
 print('Winner distribution: \n', df.groupby('winner').size(), '\n')
