@@ -8,15 +8,14 @@ from tensorflow.keras.layers import (Dense, BatchNormalization,
 model_path = './models/q.h5'
 best_path = './bestmodels/best.h5'
 
-# Compile CNN function
 
-
+# Compile model function
 def build(X_train):
+    # This is the structure used for the model that worked best
     n = X_train.shape[1]
     input = Input(shape=(n,))
     hidden = Dense(n, activation='relu')(input)
     hidden = Dense(n / 2, activation='relu')(hidden)
-    hidden = Dense(n / 4, activation='relu')(hidden)
     output = Dense(1, activation='sigmoid')(hidden)
 
     # Create model
@@ -52,7 +51,7 @@ def train(X_train, y_train, X_val, y_val):
 
 # Evaluate function
 def evaluate(data, labels):
-    # Load CNN model
+    # Load model
     classifier = load_model(best_path)
     classifier.summary()
 
@@ -63,7 +62,7 @@ def evaluate(data, labels):
 
 # Predict winners
 def predict(data):
-    # Load CNN
+    # Load model
     classifier = load_model(best_path)
     classifier.summary()
 
